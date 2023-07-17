@@ -56,9 +56,9 @@ function storeData(event) {
 
 
 
-<div class="button edit" id="editDATA">EDIT PERSONAL DETAILS</div>
+<div class="button edit" id="editDATA">EDIT</div>
 
-<div class="button del" id="deleteDATA">delete PERSONAL DETAILS</div>
+<div class="button delete" id="deleteDATA" onclick="deleteData(${code})">Delete</div>
 
 </div>
 
@@ -76,6 +76,9 @@ function storeData(event) {
 function deleteData(code) {
     firebase.database().ref(`personaldetails/${code}`).remove();
     document.getElementById(code).remove();
+    firebase.database().ref(`personaldetails/${code}`).update({
+        totalItem: totalItem - 1,
+    })
 
 }
 
