@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+
+    <title>Register here!</title>
+    <script src="https://www.gstatic.com/firebasejs/8.2.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.2/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.2/firebase-database.js"></script>
+    <script src="https://kit.fontawesome.com/d733855d1a.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <form class=" form" onsubmit="storeData(event)" id="createpersonal-details">
+        <div class="left-div-container">
+            <div class="show-delete" id="tasks-header">
+                <h1>PERSONAL DETAILS</h1>
+                <button class="button showAll" id="showAll" onclick="showAll()">SHOW ALL</button>
+                <button class="button deleteAll" id="deleteAll" onclick="deleteAll()">DELETE ALL</button>
+
+            </div>
+
+        </div>
+    </form>
+    <!--<div class="right-div-container">
+        <div class="show-delete" id="tasks-header">
+            <h1>DEVICE DETAILS</h1>
+            <button class="button showAll" id="showAll" onclick="showAll()">SHOW ALL</button>
+            <button class="button deleteAll" id="deleteAll" onclick="deleteAll()">DELETE ALL</button>
+
+        </div>
+    </div> -->
+    <script src="./registration.js"></script>
+</body>
+
+</html>

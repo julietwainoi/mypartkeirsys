@@ -1,0 +1,79 @@
+:root {
+    --primary-color: #01a2a8;
+    --primary-dark: #AB1449;
+    --gray: #aaaaaa;
+    --border: rgb(207, 207, 207);
+
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Oswald&display=swap');
+
+* {
+    transition: all 0.2s ease-in-out;
+
+}
+
+body {
+    font-family: 'work Sans', sans-serif;
+    box-sizing: border-box;
+    margin: 0;
+    background-color: rgb(231, 231, 231);
+    scroll-behavior: smooth;
+}
+
+.left-right-container {
+    margin-top: 6rem;
+}
+
+.left-div-container {
+    width: 49%;
+    margin: 0;
+    padding: 0;
+    display: inline-block;
+    margin: auto;
+    vertical-align: top;
+}
+
+.right-div-container {
+    width: 49%;
+    margin: 0;
+    padding: 0;
+    display: inline-block;
+    margin: auto;
+    padding: 30px;
+    color: gray;
+    box-sizing: border-box;
+
+
+}
+
+.left-div-container .form {
+    width: 90%;
+    border: 2px solid var(--border);
+    box-shadow: var(--border) 1.95px 1.95px 2.6px;
+    padding: 3rem 2rem;
+    box-sizing: border-box;
+    margin: 30px auto;
+    background-color: white;
+
+}
+
+.left-div-container .label {
+    display: block;
+    width: 100%;
+    color: var(--gray);
+    font-size: 28px;
+    font-family: 'Oswald', sans-serif;
+    font-stretch: semi-condensed;
+}
+
+.left-div-container .form .fullName-div,
+
+.left-div-container .form .passportnumber-div,
+.left-div-container .form .location-div,
+.left-div-container .form .emailaddress-div,
+.phonedetail-dev .form .devicemodel,
+.phonedetail-dev .form .devicebrand,
+.phonedetail-dev .form .IMEI {
+    margin-bottom: 40px;
+}
