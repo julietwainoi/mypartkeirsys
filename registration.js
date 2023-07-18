@@ -71,6 +71,14 @@ function storeData(event) {
 
 }
 
+function deleteData(code) {
+    firebase.database().ref(`personaldetails/${code}`).remove();
+    document.getElementById(code).remove();
+    firebase.database().ref(`personaldetails/${code}`).update({
+        totalItem: totalItem - 1,
+    })
+
+}
 
 
 
