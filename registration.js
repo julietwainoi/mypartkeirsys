@@ -40,12 +40,12 @@ function storeData(event) {
             Emailaddress: Emailaddress,
 
         })
-    document.getElementById("tasks-header").insertAdjacentHTML(
+    document.getElementById("data-header").insertAdjacentHTML(
         "afterend",
         `
-<div class="task-item" id="${code}">
+<div class="personal-details-item" id="${code}">
 <div class="data" id="${fullName}">
-<button class="done" id="done"><i class="fa fa-check-circle"></i></button>
+<button class="done" id="done" onclick="changeStatus(${code})"><i class="fa fa-check-circle"></i></button>
 <h2 class="fullName">${fullName}</h2>
 <p class="passportNumber">${PassportNumber}</p>
 <p class="location">${location}</p>
@@ -53,21 +53,19 @@ function storeData(event) {
 <p id="status"></p> 
 
 </div>
+<hr>
 
+<div class="buttons" >
+<div class="button edit" id="editData">EDIT</div>
 
-
-<div class="button edit" id="editDATA">EDIT</div>
-
-<div class="button delete" id="deleteDATA" onclick="deleteData(${code})">Delete</div>
-
+<div class="button delete" id="deleteData" onclick="deleteData(${code})">DELETE</div>
+</div>
 </div>
 
 
 
 `
-
-
-    )
+    );
 
 
 }
@@ -79,6 +77,24 @@ function deleteData(code) {
     firebase.database().ref(`personaldetails/${code}`).update({
         totalItem: totalItem - 1,
     })
+
+}
+function editData(c) {
+
+    document.getElementById("fullName").value = document.getElementById(c).querySelector(".data").querySelector(".fullName").innerHTML
+
+    document.getElementById("passportNumber").value = document.getElementById(c).querySelector(".data").querySelector(".passpportNumber").innerHTML
+    document.getElementById("location").value = document.getElementById(c).querySelector(".data").querySelector(".location").innerHTML
+    document.getElementById("Emailaddress").value = document.getElementById(c).querySelector(".data").querySelector(".Emailaddress").innerHTML
+
+    if (document.getElementById("submit" !== null)) {
+        document.getElementById("submit").remove()
+
+
+    }
+
+
+
 
 }
 
