@@ -56,7 +56,7 @@ function storeData(event) {
 <hr>
 
 <div class="buttons" >
-<div class="button edit" id="editData">EDIT</div>
+<div class="button edit" id="editData" onclick="editData(${code})">EDIT</div>
 
 <div class="button delete" id="deleteData" onclick="deleteData(${code})">DELETE</div>
 </div>
@@ -81,22 +81,71 @@ function deleteData(code) {
 }
 function editData(c) {
 
-    document.getElementById("fullName").value = document.getElementById(c).querySelector(".data").querySelector(".fullName").innerHTML
+    document.getElementById("FullName").value = document.getElementById(c).querySelector(".data").querySelector(".fullName").innerHTML
 
-    document.getElementById("passportNumber").value = document.getElementById(c).querySelector(".data").querySelector(".passpportNumber").innerHTML
-    document.getElementById("location").value = document.getElementById(c).querySelector(".data").querySelector(".location").innerHTML
+    document.getElementById("PassportNumber").value = document.getElementById(c).querySelector(".data").querySelector(".passportNumber").innerHTML
+    document.getElementById("Location").value = document.getElementById(c).querySelector(".data").querySelector(".location").innerHTML
     document.getElementById("Emailaddress").value = document.getElementById(c).querySelector(".data").querySelector(".Emailaddress").innerHTML
 
-    if (document.getElementById("submit" !== null)) {
-        document.getElementById("submit").remove()
+    if (document.getElementById("addpersonalDetails") !== null) {
+        document.getElementById("addpersonalDetails").remove()
 
 
     }
 
+    document.getElementById("form-btns").innerHTML = `
+    <button class="button update" id = "updateDetails" onclick = "updateData('${c}')">󠀫󠀫<i class="fas fa-sync-alt"></i> UPDATE TASK</button>
+    <button class="button cancel" id = "cancelDetails" onclick = "cancelupdation()"><i class="fas fa-ban"></i> CANCEL</button>
+    `;
+
+
+}
+function updateData(c) {
+    var updateFullName = Document.getElementById("FullName").value
+    var updatePassportNumber = Document.getElementById("PassportNumber").value
+    var updateLocation = Document.getElementById("Location").value
+    var updateEmailaddress = Document.getElementById("Emailaddress").value
+
+    firebase.database().ref(`personaldetails/${c}`).update({
+        FullName: updateFullName,
+        passportNumber: updatePassportNumber,
+        location: updateLocation,
+        Emailaddress: updateEmailaddress,
+
+    }
+    );
+    Document.getElementById("FullName").value = ""
+    Document.getElementById("PassportNumber").value = ""
+    Document.getElementById("Location").value = ""
+    Document.getElementById("Emailaddress").value = ""
+    Document.getElementById("updateDetails").remove();
+    Document.getElementById("cancelDetails").remove();
+
+    document.getElementById("form-btns").innerHTML = `
+    <button type="submit" class="button submit" id="addpersonalDetails" >󠀫󠀫SUBMIT</button>
+    `;
+
+    document.getElementById(c).querySelector(".data").querySelector(".fullName").innerHTML = updateFullName;
+    document.getElementById(c).querySelector(".data").querySelector(".passportNumber").innerHTML = updatePassportNumber;
+    document.getElementById(c).querySelector(".data").querySelector(".location").innerHTML = updateLocation;
+    document.getElementById(c).querySelector(".data").querySelector(".Emailaddress").innerHTML = updateEmailaddress; s
 
 
 
 }
+function cancelupdation() {
+    Document.getElementById("FullName").value = ""
+    Document.getElementById("PassportNumber").value = ""
+    Document.getElementById("Location").value = ""
+    Document.getElementById("Emailaddress").value = ""
+    Document.getElementById("updateDetails").remove();
+    Document.getElementById("cancelDetails").remove();
+
+    document.getElementById("form-btns").innerHTML = `
+    <button type="submit" class="button submit" id="addpersonalDetails">󠀫󠀫SUBMIT</button>
+    `;
+}
+
 
 
 
