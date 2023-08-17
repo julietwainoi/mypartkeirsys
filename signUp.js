@@ -9,14 +9,13 @@ import {
 // import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-analytics.js";
 
 const firebaseConfig = {
-    apiKey: "AIzaSyB2sKntIdOUuRCZDyQmWQwR7ipVCWNULe0",
-    authDomain: "keir-system.firebaseapp.com",
-    databaseURL: "https://keir-system-default-rtdb.firebaseio.com",
-    projectId: "keir-system",
-    storageBucket: "keir-system.appspot.com",
-    messagingSenderId: "1024894883197",
-    appId: "1:1024894883197:web:6278b53d7bc470d8346814",
-    measurementId: "G-M7GX4YMQCK"
+    apiKey: "AIzaSyB8Pyl0oG86mB5J-tYndPfydCPu6WsrWDc",
+    authDomain: "phone-keired.firebaseapp.com",
+    projectId: "phone-keired",
+    storageBucket: "phone-keired.appspot.com",
+    messagingSenderId: "334878868451",
+    appId: "1:334878868451:web:4d3975218ad170d5d2d6d6",
+    measurementId: "G-CYCD9F048C"
 };
 
 

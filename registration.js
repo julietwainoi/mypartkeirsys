@@ -1,12 +1,11 @@
 const firebaseConfig = {
-    apiKey: "AIzaSyB2sKntIdOUuRCZDyQmWQwR7ipVCWNULe0",
-    authDomain: "keir-system.firebaseapp.com",
-    databaseURL: "https://keir-system-default-rtdb.firebaseio.com",
-    projectId: "keir-system",
-    storageBucket: "keir-system.appspot.com",
-    messagingSenderId: "1024894883197",
-    appId: "1:1024894883197:web:6278b53d7bc470d8346814",
-    measurementId: "G-M7GX4YMQCK"
+    apiKey: "AIzaSyB8Pyl0oG86mB5J-tYndPfydCPu6WsrWDc",
+    authDomain: "phone-keired.firebaseapp.com",
+    projectId: "phone-keired",
+    storageBucket: "phone-keired.appspot.com",
+    messagingSenderId: "334878868451",
+    appId: "1:334878868451:web:4d3975218ad170d5d2d6d6",
+    measurementId: "G-CYCD9F048C"
 };
 
 firebase.initializeApp(firebaseConfig);
@@ -32,7 +31,7 @@ function storeData(event) {
     //storing data into the database
     firebase
         .database()
-        .ref(`personaldetails/${code}`)
+        .ref("personaldetails/" + code)
         .set({
             FullName: fullName,
             passportNumber: PassportNumber,
@@ -72,9 +71,9 @@ function storeData(event) {
 
 
 function deleteData(code) {
-    firebase.database().ref(`personaldetails/${code}`).remove();
+    firebase.database().ref("personaldetails/" + code).remove();
     document.getElementById(code).remove();
-    firebase.database().ref(`personaldetails/${code}`).update({
+    firebase.database().ref("personaldetails/" + code).update({
         totalItem: totalItem - 1,
     })
 
@@ -98,15 +97,15 @@ function editData(c) {
     <button class="button cancel" id = "cancelDetails" onclick = "cancelupdation()"><i class="fas fa-ban"></i> CANCEL</button>
     `;
 
-
+    //update data and remove update and cancel button
 }
 function updateData(c) {
-    var updateFullName = Document.getElementById("FullName").value
-    var updatePassportNumber = Document.getElementById("PassportNumber").value
-    var updateLocation = Document.getElementById("Location").value
-    var updateEmailaddress = Document.getElementById("Emailaddress").value
+    var updateFullName = document.getElementById("FullName").value
+    var updatePassportNumber = document.getElementById("PassportNumber").value
+    var updateLocation = document.getElementById("Location").value
+    var updateEmailaddress = document.getElementById("Emailaddress").value
 
-    firebase.database().ref(`personaldetails/${c}`).update({
+    firebase.database().ref("personaldetails/" + c).update({
         FullName: updateFullName,
         passportNumber: updatePassportNumber,
         location: updateLocation,
@@ -114,38 +113,79 @@ function updateData(c) {
 
     }
     );
-    Document.getElementById("FullName").value = ""
-    Document.getElementById("PassportNumber").value = ""
-    Document.getElementById("Location").value = ""
-    Document.getElementById("Emailaddress").value = ""
-    Document.getElementById("updateDetails").remove();
-    Document.getElementById("cancelDetails").remove();
+    document.getElementById("FullName").value = "";
+    document.getElementById("PassportNumber").value = "";
+    document.getElementById("Location").value = "";
+    document.getElementById("Emailaddress").value = "";
+    document.getElementById("updateDetails").remove();
+    document.getElementById("cancelDetails").remove();
 
     document.getElementById("form-btns").innerHTML = `
-    <button type="submit" class="button submit" id="addpersonalDetails" >󠀫󠀫SUBMIT</button>
+    <button type="submit" class="button submit" id="addpersonalDetails">󠀫󠀫SUBMIT</button>
     `;
 
     document.getElementById(c).querySelector(".data").querySelector(".fullName").innerHTML = updateFullName;
     document.getElementById(c).querySelector(".data").querySelector(".passportNumber").innerHTML = updatePassportNumber;
     document.getElementById(c).querySelector(".data").querySelector(".location").innerHTML = updateLocation;
-    document.getElementById(c).querySelector(".data").querySelector(".Emailaddress").innerHTML = updateEmailaddress; s
+    document.getElementById(c).querySelector(".data").querySelector(".Emailaddress").innerHTML = updateEmailaddress;
 
 
 
 }
 function cancelupdation() {
-    Document.getElementById("FullName").value = ""
-    Document.getElementById("PassportNumber").value = ""
-    Document.getElementById("Location").value = ""
-    Document.getElementById("Emailaddress").value = ""
-    Document.getElementById("updateDetails").remove();
-    Document.getElementById("cancelDetails").remove();
+    document.getElementById("FullName").value = ""
+    document.getElementById("PassportNumber").value = ""
+    document.getElementById("Location").value = ""
+    document.getElementById("Emailaddress").value = ""
+    document.getElementById("updateDetails").remove();
+    document.getElementById("cancelDetails").remove();
 
     document.getElementById("form-btns").innerHTML = `
     <button type="submit" class="button submit" id="addpersonalDetails">󠀫󠀫SUBMIT</button>
     `;
 }
+var data;
+firebase
+    .database()
+    .ref("personaldetails")
+    .on("value", function (snapshot) {
+        data = snapshot.val();
+    });
 
+function deleteAll() {
+    var option = false
+    if
 
+        (totalItem === 0 && document.getElementById("info") === null) {
+        document.getElementById("data-header").insertAdjacentHTML(
+            "afterend",
+            `<div class="no-task-info" id = "info">
+        <i class="fas fa-info-circle"></i>
+        No pending tasks
+    </div>`
+        )
+    }
 
-
+    if (totalItem !== 0) {
+        option = confirm(
+            "The tasks will be permanently deleted. Do you want to continue?"
+        );
+        if (option === true) {
+            firebase.database().ref("personaldetails").remove();
+            document.querySelectorAll(".personal-details-item").forEach((element) => {
+                element.remove();
+            });
+            firebase.database().ref("Totalpersonaldetails").update({
+                totalItems: 0,
+                maxCode: 0,
+            });
+            document.getElementById("tasks-header").insertAdjacentHTML(
+                "afterend",
+                `<div class="no-task-info" id = "info">
+                <i class="fas fa-info-circle"></i>
+                All items deleted
+            </div>`
+            );
+        }
+    }
+}

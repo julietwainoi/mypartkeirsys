@@ -109,8 +109,8 @@ body {
 
 .personal-details .fullName,
 .personal-details .passportNumber,
-.personal-details .fullName,
-.personal-details .passportNumber {
+.personal-details .location,
+.personal-details .Emailaddress {
     font-size: 28px;
     font-family: 'Oswald', sans-serif;
     font-stretch: semi-condensed;
@@ -168,6 +168,7 @@ body {
 
 .edit:hover {
     background-color: #EA580C;
+
 }
 
 .delete {
