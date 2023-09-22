@@ -7,13 +7,24 @@ const firebaseConfig = {
     appId: "1:334878868451:web:4d3975218ad170d5d2d6d6",
     measurementId: "G-CYCD9F048C"
 };
-
 firebase.initializeApp(firebaseConfig);
 
+function validateEmail() {
+    var emailID = document.form.Emailaddress.value;
+    atpos = emailID.indexOf("@");
+    dotpos = emailID.lastIndexOf(".");
 
+    if (atpos < 1 || (dotpos - atpos < 2)) {
+        alert("Please enter correct email ID")
+        document.form.Emailaddress.focus();
+        return false;
+    }
+    return (true);
+}
 var totalItem;
 var maxCode;
 var code;
+
 
 function storeData(event) {
     event.preventDefault()
@@ -22,6 +33,8 @@ function storeData(event) {
     var PassportNumber = document.getElementById("PassportNumber").value;
     var location = document.getElementById("Location").value;
     var Emailaddress = document.getElementById("Emailaddress").value;
+
+
 
     document.getElementById("FullName").value = ""
     document.getElementById("PassportNumber").value = ""
@@ -151,6 +164,46 @@ firebase
     .on("value", function (snapshot) {
         data = snapshot.val();
     });
+function showAll() {
+    if (data === null && document.getElementById("info") == null) {
+        document.getElementById("data-header").insertAdjacentHTML(
+            "afterend",
+            `<div class="no-task-info" id = "info">
+                  <i class="fas fa-info-circle"></i>
+                  No pending tasks
+              </div>`
+        );
+    }
+
+    document.getElementById("data-header").insertAdjacentHTML(
+        "afterend",
+        `
+<div class="personal-details-item" id="${code}">
+<div class="data" id="${fullName}">
+<button class="done" id="done" onclick="changeStatus(${code})"><i class="fa fa-check-circle"></i></button>
+<h2 class="fullName">${fullName}</h2>
+<p class="passportNumber">${PassportNumber}</p>
+<p class="location">${location}</p>
+<p class="Emailaddress">${Emailaddress}</p>
+<p id="status"></p> 
+
+</div>
+<hr>
+
+<div class="buttons" >
+<div class="button edit" id="editData" onclick="editData(${code})">EDIT</div>
+
+<div class="button delete" id="deleteData" onclick="deleteData(${code})">DELETE</div>
+</div>
+</div>
+
+
+
+`
+    );
+
+
+}
 
 function deleteAll() {
     var option = false
@@ -179,7 +232,7 @@ function deleteAll() {
                 totalItems: 0,
                 maxCode: 0,
             });
-            document.getElementById("tasks-header").insertAdjacentHTML(
+            document.getElementById("data-header").insertAdjacentHTML(
                 "afterend",
                 `<div class="no-task-info" id = "info">
                 <i class="fas fa-info-circle"></i>
